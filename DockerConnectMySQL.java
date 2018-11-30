@@ -28,7 +28,7 @@ wpisywanie="INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) V
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
 stmt.executeQuery(wpisanie);
-stmt.executeQuesry(wpisywanie);
+stmt.executeQuery(wpisywanie);
 
       while(rs.next()){
          int id  = rs.getInt("PersonID");
