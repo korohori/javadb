@@ -24,7 +24,7 @@ stmt.executeUpdate("INSERT INTO Tabela (id, Dane1, Dane2) VALUES (3, 'KJaktus', 
 stmt.executeUpdate("INSERT INTO Tabela (id, Dane1, Dane2) VALUES (7, 'Kapusniak' , 'Ogorkowa');");
 ResultSet result = stmt.executeQuery("SELECT * FROM Tabela");
 
-      while(rs.next()){
+      while(result.next()){
          int id  = rs.getInt("id");
          String dane1 = rs.getString("Dane1");
          String dane2 = rs.getString("Dane2");
