@@ -2,10 +2,11 @@ import java.sql.*;
 
 public class DockerConnectMySQL {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://db:3306/firstdb";
+   static final String DB_URL = "jdbc:mysql://db:10.0.10.3:3306/baza";
+//MATEUSZ ORZEŁ
 
-   static final String USER = "user";
-   static final String PASS = "pass123";
+   static final String USER = "morzel";
+   static final String PASS = "12345";
    
    public static void main(String[] args) {
    Connection conn = null;
@@ -13,35 +14,25 @@ public class DockerConnectMySQL {
    try{
       Class.forName("com.mysql.jdbc.Driver");
 
-      System.out.println("Connecting to database...");
+      System.out.println("Czekaj na połączenie...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
       stmt = conn.createStatement();
-      String sql;
-String wpisanie;
-String wpisywanie;
-
-	wpisanie ="CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );";
-
-wpisywanie="INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');";
-
-      sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
-      ResultSet rs = stmt.executeQuery(sql);
-stmt.executeQuery(wpisanie);
-stmt.executeQuery(wpisywanie);
+      
+stmt.executeUpdate("CREATE TABLE Tabela(id int, Dane1 varchar(255), Dane2 varchar(255));");
+stmt.executeUpdate("INSERT INTO Tabela (id, Dane1, Dane2) VALUES (3, 'KJaktus', 'Kaktus2');");
+stmt.executeUpdate("INSERT INTO Tabela (id, Dane1, Dane2) VALUES (7, 'Kapusniak' , 'Ogorkowa');");
+ResultSet result = stmt.executeQuery("SELECT * FROM Tabela");
 
       while(rs.next()){
-         int id  = rs.getInt("PersonID");
-         String first = rs.getString("FirstName");
-         String last = rs.getString("LastName");
-		 String address = rs.getString("Address");
-		 String city = rs.getString("City");
+         int id  = rs.getInt("id");
+         String dane1 = rs.getString("Dane1");
+         String dane2 = rs.getString("Dane2");
+	
+		System.out.print("ID: " +id);
+		System.out.print(",Dane1:" + dane1);
+		System.out.print(",Dane2:" + dane2);
 
-         System.out.println("ID: " + id);
-         System.out.println(", First: " + first);
-         System.out.println(", Last: " + last);
-		 System.out.println(", Address: " + address);
-		 System.out.println(", City: " + city);
       }
       rs.close();
       stmt.close();
