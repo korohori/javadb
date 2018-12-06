@@ -25,16 +25,16 @@ stmt.executeUpdate("INSERT INTO Tabela (id, Dane1, Dane2) VALUES (7, 'Kapusniak'
 ResultSet result = stmt.executeQuery("SELECT * FROM Tabela");
 
       while(result.next()){
-         int id  = rs.getInt("id");
-         String dane1 = rs.getString("Dane1");
-         String dane2 = rs.getString("Dane2");
+         int id  = result.getInt("id");
+         String dane1 = result.getString("Dane1");
+         String dane2 = result.getString("Dane2");
 	
 		System.out.print("ID: " +id);
 		System.out.print(",Dane1:" + dane1);
 		System.out.print(",Dane2:" + dane2);
 
       }
-      rs.close();
+      result.close();
       stmt.close();
       conn.close();
    }catch(SQLException se){
